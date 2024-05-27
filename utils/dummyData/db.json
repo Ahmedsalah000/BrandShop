@@ -1,0 +1,35 @@
+{
+    "products": [
+      {
+        "name": "Product 1",
+        "price": 29.99,
+        "description": "Description of product 1",
+        "category": "Category 1",
+        "stock": 100,
+        "image": "image1.jpg"
+      },
+      {
+        "name": "Product 2",
+        "price": 49.99,
+        "description": "Description of product 2",
+        "category": "Category 2",
+        "stock": 50,
+        "image": "image2.jpg"
+      }
+    ],
+    "customers": [
+      {
+        "name": "Customer 1",
+        "email": "customer1@example.com",
+        "address": "123 Main St"
+      },
+      {
+        "name": "Customer 2",
+        "email": "customer2@example.com",
+        "address": "456 Main St"
+      }
+    ],
+    "orders": [],
+    "reviews": []
+  }
+  
