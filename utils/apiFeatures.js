@@ -15,8 +15,8 @@ class ApiFeatures {
       (match) => `$${match}`
     );
 
-    console.log(queryStr);
-    console.log(JSON.parse(queryStr));
+    // console.log(queryStr);
+    // console.log(JSON.parse(queryStr));
 
     this.mongooseQuery = this.mongooseQuery.find(JSON.parse(queryStr));
     return this;
@@ -56,7 +56,7 @@ class ApiFeatures {
 
       this.mongooseQuery = this.mongooseQuery.find(query);
     } else {
-      console.log('No keyword found in queryString.');
+      // console.log('No keyword found in queryString.');
     }
     return this;
   }
