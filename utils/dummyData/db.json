@@ -1,35 +1,119 @@
 {
-    "products": [
-      {
-        "name": "Product 1",
-        "price": 29.99,
-        "description": "Description of product 1",
-        "category": "Category 1",
-        "stock": 100,
-        "image": "image1.jpg"
-      },
-      {
-        "name": "Product 2",
-        "price": 49.99,
-        "description": "Description of product 2",
-        "category": "Category 2",
-        "stock": 50,
-        "image": "image2.jpg"
-      }
-    ],
-    "customers": [
-      {
-        "name": "Customer 1",
-        "email": "customer1@example.com",
-        "address": "123 Main St"
-      },
-      {
-        "name": "Customer 2",
-        "email": "customer2@example.com",
-        "address": "456 Main St"
-      }
-    ],
-    "orders": [],
-    "reviews": []
-  }
-  
+  "brand":[
+    {
+      "name": "Apple",
+      "image": "/images/brands/apple.jpg"
+    },
+    {
+      "name": "Samsung",
+      "image": "/images/brands/samsung.jpg"
+    },
+    {
+      "name": "Huawei",
+      "image": "/images/brands/huawei.jpg"
+    }
+  ],
+  "category":[
+    {
+      "name": "cases for samsung",
+      "image": "/images/categories/cases for samsung.jpg"
+    },
+    {
+      "name": "iphone cases",
+      "image": "/images/categories/iphone cases.jpg"
+    },
+    {
+      "name": "ipadcases",
+      "image": "/images/categories/ipad.jpg"
+    }
+  ],
+  "subcategory":[
+    {
+      "name": "iphone7",
+      "image": "/images/subcategories/iphone7.jpg"
+    },
+    {
+      "name": "iphone7 plus",
+      "image": "/images/subcategories/iphone7 plus.jpg"
+    },
+    {
+      "name": "iphone6",
+      "image": "/images/subcategories/iphone6.jpg"
+    },
+    {
+      "name": "IPad mini 3", 
+      "image": "/images/subcategories/IPad mini 3.jpg",
+
+    },
+    {
+      "name": "IPad Air 2",
+      "image": "/images/subcategories/IPad Air 2.jpg"
+
+    },
+    {
+      "name": "Samsung s22",
+      "image": "/images/subcategories/Samsung s22.jpg"
+
+    }
+      
+  ],
+  "products":[
+    {
+      "name": "Samsung s22",
+      "category": "Samsung",
+      "subcategory": "Samsung s22",
+      "image": "/images/products/samsung s22.jpg"
+    } ,
+    {
+      "name": "Samsung s22",
+      "category": "Samsung",
+      "subcategory": "Samsung s22",
+      "image": "/images/products/samsung s22.jpg"
+    }
+  ],
+  "users":[
+    {
+      "name": "admin",
+      "email": "X0i1j@example.com",
+      "role": "admin",
+      "password": "$2a$10$GxvqD8q4o7DQgEh0b8vq8e7qXtYVt0b6s6aM0lXb5ZsDpQdM0"
+    }
+
+
+  ],
+
+  "orders":[
+    {
+      "user": "admin",
+      "products": [
+        {
+          "name": "Samsung s22",
+          "category": "Samsung",
+          "subcategory": "Samsung s22",
+          "image": "/images/products/samsung s22.jpg"
+        }
+      ]
+
+    }
+  ],
+
+  "reviews":[
+    {
+      "review": "I agreed it's a goog product",
+      "rating": 3,
+      "product": "62291b820f14f6e6d2902a8c",
+      "user": "621ea668252a3bf8bb69cd28"
+  },
+  {
+    "review": "I loved it",
+    "rating": 5,
+    "product": "62291b820f14f6e6d2902a8c",
+    "user": "621ea668252a3bf8bb69cd28"
+},
+{
+
+}
+
+  ]
+
+}

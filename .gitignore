@@ -1,3 +1,10 @@
-# dependencies
-/node_modules
-/config.env
+# Dependencies
+node_modules/
+config.env
+.gitignore
+uploads
+utils/dummyData/db.json
+.eslintrc.json
+
+
+

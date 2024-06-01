@@ -1,40 +1,41 @@
-const mongoose = require('mongoose');
+const fs = require('fs');
+require('colors');
 const dotenv = require('dotenv');
-const colors = require('colors');
-const Product = require('../../models/Product');
-const Customer = require('../../models/Customer');
-const dbData = require('./db.json');
+const Product = require('../../models/productModel');
+const dbConnection = require('../../config/database');
 
-// Load environment variables
-dotenv.config({path:'config.env'});
-const connectDB = require('../../config/database');
+dotenv.config({ path: '../../config.env' });
 
-connectDB();
+// connect to DB
+dbConnection();
 
-const importData = async () => {
+// Read data
+const products = JSON.parse(fs.readFileSync('./products.json'));
+
+// Insert data into DB
+const insertData = async () => {
   try {
-    await Product.deleteMany();
-    await Customer.deleteMany();
-
-    const products = dbData.products.map(product => ({ ...product }));
-    const customers = dbData.customers.map(customer => ({ ...customer }));
-
-    await Product.insertMany(products);
-    await Customer.insertMany(customers);
-
-    console.log('Data Imported!'.green.inverse);
+    await Product.create(products);
+    console.log('Data Inserted'.green.inverse);
     process.exit();
   } catch (error) {
-    console.error(`${error}`.red.inverse);
-    process.exit(1);
+    console.log(error);
   }
 };
 
-if (process.argv[2] === '-d') {
-  // Clear the database
-  importData();
-} else {
-  console.log('Specify the -d flag to import data.'.yellow);
-  process.exit();
+// Delete data from DB
+const destroyData = async () => {
+  try {
+    await Product.deleteMany();
+    console.log('Data Destroyed'.red.inverse);
+    process.exit();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+if (process.argv[2] === '-i') {
+  insertData();
+} else if (process.argv[2] === '-d') {
+  destroyData();
 }

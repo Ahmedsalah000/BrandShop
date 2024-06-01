@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
-const colors = require('colors');
-const dotenv = require('dotenv');
+require('colors');
 
-// Connect to the database
-dotenv.config({path:'config.env'});
-const connectDB = async () => {
+const dbConnection = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
+
     console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
   } catch (error) {
     console.error(`Error: ${error.message}`.red.underline.bold);
@@ -14,4 +12,5 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+module.exports = dbConnection;
+
