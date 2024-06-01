@@ -2,10 +2,11 @@
   "name": "brandshop",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "start:prod": "cross-env NODE_ENV=production node index.js"
   },
   "keywords": [],
   "author": "ahmed salah aboshendy",
@@ -19,7 +20,10 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
+    "express-mongo-sanitize": "^2.2.0",
     "express-validator": "^7.1.0",
+    "helmet": "^7.1.0",
+    "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "mongoose": "^8.4.0",
@@ -30,9 +34,13 @@
     "sharp": "^0.33.4",
     "slugify": "^1.6.6",
     "stripe": "^15.8.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

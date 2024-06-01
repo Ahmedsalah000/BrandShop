@@ -8,6 +8,10 @@ require('colors');
 const compression = require('compression');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+//! security packages
+const helmet = require("helmet");//to secure express app
+const xss = require("xss-clean");//to prevent cross site scripting
+const mongoSanitize = require("express-mongo-sanitize");//to prevent mongo injection
 
 const ApiError = require('./utils/apiError');
 const globalError = require('./middlewares/errorMiddleware');
@@ -22,6 +26,14 @@ dbConnection();
 
 // Builtin Middleware
 const app = express();
+app.disable("x-powered-by");
+
+
+
+// Security
+app.use(helmet());//
+app.use(xss());
+app.use(mongoSanitize());
 
 app.use(cors());
 app.options('*', cors());
@@ -30,8 +42,7 @@ app.enable('trust proxy');//
 // Add hook here before we call body parser, because stripe will send data in the body in form raw
 app.post(
   '/webhook-checkout',
-  // express.raw({ type: 'application/json' }),
-  bodyParser.raw({ type: 'application/json' }),
+  express.raw({ type: 'application/json' }),
   webhookCheckout
 );
 
