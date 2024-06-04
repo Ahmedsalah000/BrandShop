@@ -47,7 +47,7 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
 
   await sharp(req.file.buffer)
     // .resize(500, 500)
-    .toFile(`categories/${filename}`); // write into a file on the disk
+    .toFile(`uploads/categories/${filename}`); // write into a file on the disk
 
   req.body.image = filename;
   next();
