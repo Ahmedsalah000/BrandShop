@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-// Create the connection to the database using mongoose.connect (not createConnection)
-mongoose.connect(process.env.MONGO_URI).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((err) => {
-    console.error("Database connection error:", err);
-});
+
 
 // Define the schema
 const orderSchema = new mongoose.Schema(
