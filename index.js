@@ -52,7 +52,7 @@ app.use(express.json());
 // app.options('*', cors());
 
 // Parse URL-encoded bodies
-// app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
