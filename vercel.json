@@ -15,7 +15,7 @@
     "rewrites": [
       {
         "source": "/categories/(.*)",
-        "destination": "/uploads/$1"
+        "destination": "/uploads/$"
       }
     ]
   }
