@@ -11,5 +11,11 @@
         "src": "/(.*)",
         "dest": "/"
       }
+    ],
+    "rewrites": [
+      {
+        "source": "/categories/(.*)",
+        "destination": "/uploads/$1"
+      }
     ]
   }
