@@ -1,31 +1,38 @@
 const sharp = require('sharp');
 const { v4: uuidv4 } = require('uuid');
 const asyncHandler = require('express-async-handler');
+const { v2: cloudinary } = require('cloudinary');
+const DatauriParser = require('datauri/parser');
+const path = require('path');
 
 const factory = require('./handlersFactory');
 const { uploadSingleImage } = require('../middlewares/imageUpload');
 const Brand = require('../models/brandModel');
+const parser = new DatauriParser();
 
 exports.uploadBrandImage = uploadSingleImage('image');
-
-// Resize image
 exports.resizeImage = asyncHandler(async (req, res, next) => {
   if (!req.file) return next();
 
-  // req.file.filename = `category-${uuidv4()}-${Date.now()}.jpeg`;
-  const ext = req.file.mimetype.split('/')[1];
-  const filename = `brand-${uuidv4()}-${Date.now()}.${ext}`;
+  // Process the image buffer with Sharp and resize it
+  const processedImage = await sharp(req.file.buffer)
+    .resize(500, 500)
+    .toBuffer();
 
-  await sharp(req.file.buffer)
-    // .resize(500, 500)
-    // .toFormat('jpeg')
-    // .jpeg({ quality: 90 })
-    .toFile(`uploads/brands/${filename}`); // write into a file on the disk
-  console.log(filename);
-  req.body.image = filename;
+  // Convert the processed image buffer to a DataURI
+  const dataUri = parser.format(path.extname(req.file.originalname).toString(), processedImage);
+
+  // Upload the DataURI to Cloudinary
+  const result = await cloudinary.uploader.upload(dataUri.content, {
+    folder: 'brands',
+    public_id: `brand-${uuidv4()}-${Date.now()}`,
+  });
+
+  // Save the URL of the uploaded image to the request body
+  req.body.image = result.secure_url;
+
   next();
 });
-
 // @desc      Get all brands
 // @route     GET /api/v1/brands
 // @access    Public

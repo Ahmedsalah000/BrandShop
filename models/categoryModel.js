@@ -37,7 +37,7 @@ const setImageUrl = (doc) => {
   }
 };
 
-categorySchema.post('init', (doc) => {
+categorySchema.post('init', (doc) => {// doc =json in database or  means  the res inpostman
   setImageUrl(doc);
 });
 

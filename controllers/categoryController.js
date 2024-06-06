@@ -38,8 +38,7 @@ const Category = require('../models/categoryModel');
 // const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 
 // exports.uploadCategoryImage = upload.single('image');
-const parser = new DatauriParser();
-exports.uploadCategoryImage = uploadSingleImage('image');
+
 
 // // Resize image
 // exports.resizeImage = asyncHandler(async (req, res, next) => {
@@ -58,6 +57,8 @@ exports.uploadCategoryImage = uploadSingleImage('image');
 //   req.body.image = filename;
 //   next();
 // });
+const parser = new DatauriParser();
+exports.uploadCategoryImage = uploadSingleImage('image');
 exports.resizeImage = asyncHandler(async (req, res, next) => {
   if (!req.file) return next();
 
