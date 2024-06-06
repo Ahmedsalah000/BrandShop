@@ -9,7 +9,7 @@ const multer = require('multer');
 const ApiError = require('../utils/apiError');
 const Product = require('../models/productModel');
 const factory = require('./handlersFactory');
-
+const parser = new DatauriParser();
 
 // Storage
 const multerStorage = multer.memoryStorage();
@@ -32,10 +32,9 @@ exports.uploadProductImages = upload.fields([
 
 ]);
 
-const parser = new DatauriParser();
+
 exports.resizeProductImages = asyncHandler(async (req, res, next) => {
   if (!req.files) return next();
-  console.log(req.files);
 
   // 1) Image Process for imageCover
   if (req.files.imageCover) {
@@ -52,7 +51,7 @@ exports.resizeProductImages = asyncHandler(async (req, res, next) => {
     });
 
     // Save the URL of the uploaded image to the request body
-    req.body.imageCover = result.secure_url;
+    req.body.imageCover = result.secure_url;  // Directly using Cloudinary URL
   }
 
   req.body.images = [];
@@ -74,71 +73,13 @@ exports.resizeProductImages = asyncHandler(async (req, res, next) => {
         });
 
         // Save the URL of the uploaded image to the request body
-        req.body.images.push(result.secure_url);
+        req.body.images.push(result.secure_url);  // Directly using Cloudinary URL
       })
     );
   }
 
   next();
 });
-
-// exports.resizeProductImages = asyncHandler(async (req, res, next) => {
-//   // console.log(req.files);
-//   // 1) Image Process for imageCover
-//   if (req.files.imageCover) {
-//     const ext = req.files.imageCover[0].mimetype.split('/')[1];
-//     const imageCoverFilename = `products-${uuidv4()}-${Date.now()}-cover.${ext}`;
-//     const processedImage = await sharp(req.files.imageCover[0].buffer)
-//       // .resize(2000, 1333)
-//       // .toFormat('jpeg')
-//       // .jpeg({ quality: 90 })
-//       .toBuffer();
-      
-//   // Convert the processed image buffer to a DataURI
-//   const dataUri = parser.format(path.extname(req.files.imageCover[0].originalname).toString(), processedImage);
-//     // Upload the DataURI to Cloudinary
-//     const result = await cloudinary.uploader.upload(dataUri.content, {
-//       folder: 'products',
-//       public_id: `product-${uuidv4()}-${Date.now()}-cover`,
-//     });
-  
-
-//   // Save the URL of the uploaded image to the request body
-//   req.body.image = result.secure_url;
-//   }
-//   req.body.images = [];
-//   // 2- Image processing for images
-//   if (req.files.images) {
-//     await Promise.all(
-//       req.files.images.map(async (img, index) => {
-//         const ext = img.mimetype.split('/')[1];
-//         const filename = `products-${uuidv4()}-${Date.now()}-${
-//           index + 1
-//         }`;
-//         const processedImages=await sharp(img.buffer).toBuffer();
-
-//         // Convert the processed image buffer to a DataURI  
-//         const dataUri = parser.format(path.extname(req.files.images.originalname).toString(), processedImages);
-
-//         // Upload the DataURI to Cloudinary
-//         const result = await cloudinary.uploader.upload(dataUri.content, {
-//           folder: 'products',
-//           public_id: filename,
-//         });
-//         // Save images into database
-//         req.body.images.push(filename);
-
-//         // Save the URL of the uploaded image to the request body 
-//         req.body.images[index] = result.secure_url;
-//       })
-//     );
-//   }
-
-//   // console.log(req.body.imageCover);
-//   // console.log(req.body.images);
-//   next();
-// });
-
 // @desc      Get all products
 // @route     GET /api/v1/products
 // @access    Public

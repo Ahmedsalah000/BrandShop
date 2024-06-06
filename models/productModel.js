@@ -76,37 +76,13 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-// Virtual populate (don't add it know, add it after create review schema)
-// productSchema.virtual('reviews', {
-//   ref: 'Review',
-//   foreignField: 'product',
-//   localField: '_id',
-// });
 
-// Virtual populate: populate review on the product (review pointing to the product not the product pointing to the review) the parent (product) does not know about the child (review)
 productSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'product',
   localField: '_id',
 });
 
-// const setImageUrl = (doc) => {
-//   if (doc.imageCover) {
-//     const imageCoverUrl = `${process.env.BASE_URL}/products/${doc.imageCover}`;
-//     doc.imageCover = imageCoverUrl;
-//   }
-//   if (doc.images) {
-//     const images = [];
-//     doc.images.forEach((image) => {
-//       const imageUrl = `${process.env.BASE_URL}/products/${image}`;
-//       images.push(imageUrl);
-//     });
-//     doc.images = images;
-//   }
-// };
 
-// productSchema.post('save', (doc) => {
-//   setImageUrl(doc);
-// });
 
 module.exports = mongoose.model('Product', productSchema);

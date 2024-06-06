@@ -4,13 +4,13 @@ const ApiFeatures = require('../utils/apiFeatures');
 
 const setImageUrl = (doc) => {
   if (doc.imageCover) {
-    const imageCoverUrl = `${process.env.BASE_URL}/products/${doc.imageCover}`;
+    const imageCoverUrl = `${doc.imageCover}`;
     doc.imageCover = imageCoverUrl;
   }
   if (doc.images) {
     const images = [];
     doc.images.forEach((image) => {
-      const imageUrl = `${process.env.BASE_URL}/products/${image}`;
+      const imageUrl = `${image}`;
       images.push(imageUrl);
     });
     doc.images = images;
