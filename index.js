@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
+const cloudinary = require('cloudinary').v2;
 
 dotenv.config({ path: 'config.env' });
 const morgan = require('morgan');
@@ -19,16 +20,19 @@ const mountRoutes = require('./routes');
 const { webhookCheckout } = require('./controllers/orderService');
 
 const dbConnection = require('./config/database');
+const { cloudinaryConfig } = require('./config/cloudinaryConfig');
 
 
 // DB Connection
 dbConnection();
 
+
 // Builtin Middleware
 const app = express();
 app.disable("x-powered-by");
 
-
+// Apply Cloudinary middleware
+app.use(cloudinaryConfig);
 
 // Security
 app.use(helmet());//
