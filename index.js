@@ -66,7 +66,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(compression());
 
-app.use(cors());
+
 
 // Mount routers
 mountRoutes(app);
@@ -88,10 +88,4 @@ const server = app.listen(PORT, () => {
 
 // we are listening to this unhandled rejection event, which then allow us to handle all
 // errors that occur in asynchronous code which were not previously handled
-process.on('unhandledRejection', (err) => {
-  console.log(err.name, err.message);
-  server.close(() => {
-    console.log('unhandledRejection!! shutting down...');
-    process.exit(1);
-  });
-});
+

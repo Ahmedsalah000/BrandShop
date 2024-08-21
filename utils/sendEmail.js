@@ -10,7 +10,7 @@ const sendEmail = async (options) => {
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT, //if secure is false, it uses 587, by default, and 465 if true
-    secure: true,
+    secure: false,
     requireTLS: true,
     auth: {
       user: process.env.EMAIL_USER,
@@ -20,7 +20,7 @@ const sendEmail = async (options) => {
 
   // 2) Define the email options
   const mailOptions = {
-    from: 'Brand Shop App <abushendy345@gmail.com>',
+    from: 'Brand Shop App <zadkreet@gmail.com>',
     to: options.email,
     subject: options.subject,
     text: options.message,

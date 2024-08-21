@@ -158,11 +158,10 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
   // 3)  Send password reset code via email
   // We use try and catch because i want to implement logic if error happens
-  const message = `<h2>test test </h2>\nHi ${user.name},\n We received a request to reset the password on your brand shop Account. \n ${resetCode} \n Enter this code to complete the reset. \n Thanks for helping us keep your account secure.\n The brand shop Team`;
+  const message = `Hi ${user.name},\n We received a request to reset the password on your brand shop Account. \n ${resetCode} \n Enter this code to complete the reset. \n Thanks for helping us keep your account secure.\n The brand shop Team`;
 
   try {
     await sendEmail({
-      from: 'Brand Shop App <abushendy@gmail.com>',
       email: user.email,
       subject: 'Your Password Reset Code (valid for 10 min)',
       message,
