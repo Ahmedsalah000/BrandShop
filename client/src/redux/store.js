@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk';
+import { applyMiddleware } from 'redux'
+import { legacy_createStore as createStore} from 'redux'
+import { thunk } from 'redux-thunk';  
 import rootReducer from './reducers/rootReducer'
-import { composeWithDevTools } from 'redux-devtools-extension'
-const initailState = {}
 
-const meddleware = [thunk]
+const initialState = {}
 
-const store = createStore(rootReducer, initailState, composeWithDevTools(applyMiddleware(...meddleware)))
+const store = createStore(rootReducer, initialState, applyMiddleware(thunk))
 
 export default store
