@@ -441,7 +441,7 @@ body {
 }
 
 .cart-checkout {
-  height: 200px;
+  height: 250px;
   width: 100%;
   border-radius: 20px;
   background-color: #ffffff;
@@ -656,3 +656,33 @@ body {
   text-align: center;
 }
 /* end filter */
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+
+.dropdown-toggle {
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: bold  !important;
+  margin-top: 14px;
+}
+.dropdown-menu {
+  background-color: #212529 !important;
+  color: white !important;
+}
+.dropdown-item {
+  color: white !important;
+  text-align: center !important;
+}
+.dropdown-item:hover {
+  color: #212529 !important;
+  background-color: white !important;
+}
+
+.badge {
+  font-size: 12px !important;
+font-weight: bold !important;
+}
