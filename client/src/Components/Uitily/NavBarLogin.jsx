@@ -71,7 +71,7 @@ const NavBarLogin = () => {
                             style={{ color: "white" }}>
                             <img src={cart} className="login-img" alt="sfvs" />
                             <p style={{ color: "white" }}>العربه</p>
-                            <span class="position-absolute top-10 start-0 translate-middle badge rounded-pill bg-danger">
+                            <span className="position-absolute top-10 start-0 translate-middle badge rounded-pill bg-danger">
                                 {itemsNum || 0}
                             </span>
 
