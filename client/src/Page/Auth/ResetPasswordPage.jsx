@@ -1,7 +1,4 @@
-import React from 'react'
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import LoginHook from '../../hook/auth/login-hook';
+import { Container, Row, Col } from 'react-bootstrap'
 import { ToastContainer } from 'react-toastify';
 import ResetPasswordHook from '../../hook/auth/reset-password-hook';
 const RsetPasswordPage = () => {

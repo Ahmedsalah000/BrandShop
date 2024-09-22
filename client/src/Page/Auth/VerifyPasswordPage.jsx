@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { ToastContainer } from 'react-toastify';
 import VerifyPasswordHook from '../../hook/auth/verify-password-hook';
