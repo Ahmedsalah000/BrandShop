@@ -18,7 +18,7 @@ const ProductDetalisPage = () => {
 
     return (
         <div style={{ minHeight: '670px' }}>
-            <CategoryHeader />
+
             <Container>
                 <ProductDetalis />
                 <RateContainer rateAvg={rateAvg} rateQty={rateQty} />

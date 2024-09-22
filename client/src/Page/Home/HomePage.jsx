@@ -14,7 +14,7 @@ const HomePage = () => {
             <HomeCategory />
             <CardProductsContainer products={items} title="الاكثر مبيعا" btntitle="المزيد" pathText="/products" />
             <DiscountSection />
-            <CardProductsContainer products={items} title="احدث الازياء" btntitle="المزيد" pathText="/products" />
+            <CardProductsContainer products={items} title="احدث المنتجات" btntitle="المزيد" pathText="/products" />
             <BrandFeatured title="اشهر الماركات" btntitle="المزيد" />
 
         </div>
