@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { createCategory } from '../../redux/actions/categoryAction'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notify from '../../hook/useNotifaction'
 import avatar from '../../images/avatar.png'
