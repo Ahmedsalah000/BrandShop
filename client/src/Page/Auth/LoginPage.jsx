@@ -38,7 +38,7 @@ const LoginPage = () => {
                     <label className="mx-auto my-4">
 
                         <Link to="/user/forget-password" style={{ textDecoration: 'none', color: 'red' }}>
-                            هل نسيت كلمه السر
+                           ؟ هل نسيت كلمه السر
                         </Link>
                     </label>
 

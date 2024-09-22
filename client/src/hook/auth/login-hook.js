@@ -41,8 +41,7 @@ const LoginHook = () => {
                     localStorage.setItem("user", JSON.stringify(res.data.data))
                     notify("تم تسجيل الدخول بنجاح", "success")
                     setTimeout(() => {
-                        navigate("/")
-                        // window.location.href = "/"
+                        window.location.href = "/"
                     }, 1500);
                 } else {
                     localStorage.removeItem("token")
