@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import baseUrl from '../../Api/baseURL';
+import  { useEffect } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllBrand, getAllBrandPage } from '../../redux/actions/brandAction'
 

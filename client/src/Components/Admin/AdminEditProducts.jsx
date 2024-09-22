@@ -8,7 +8,7 @@ import MultiImageInput from 'react-multiple-image-input';
 
 import { CompactPicker } from 'react-color'
 import { ToastContainer } from 'react-toastify';
-import AdminEditProductsHook from '../../hook/products/edit-products-hook';
+import AdminEditProductsHook from './../../hook/products/edit-products-hook';
 
 const AdminEditProducts = () => {
     const { id } = useParams();

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { getOneCategory } from '../../redux/actions/subcategoryAction';
 import { createProduct } from '../../redux/actions/productsAction';
 import notify from './../../hook/useNotifaction';

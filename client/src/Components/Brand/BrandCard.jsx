@@ -1,4 +1,3 @@
-import React from 'react'
 import { Col,Card } from 'react-bootstrap'
 
 const BrandCard = ({img}) => {

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { createBrand } from '../../redux/actions/brandAction'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notify from '../../hook/useNotifaction'
 import avatar from '../../images/avatar.png'
 
 const AddBrandHook = () => {
- 
+
     const dispatch = useDispatch();
     const [img, setImg] = useState(avatar)
     const [name, setName] = useState('')
