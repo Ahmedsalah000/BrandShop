@@ -13,7 +13,6 @@ const AdminAllOrdersPage = () => {
 
                 <Col sm="9" xs="10" md="10">
                     <AdminAllOrders />
-                    <Pagination />
                 </Col>
             </Row>
         </Container>

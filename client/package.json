@@ -13,6 +13,7 @@
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "multiselect-react-dropdown": "^2.0.25",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-color": "^2.19.3",
@@ -42,5 +43,4 @@
     "vite": "^5.4.1"
   },
   "proxy": "https://brand-shop-omega.vercel.app"
-
 }

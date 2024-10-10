@@ -1,5 +1,9 @@
 import { Row } from 'react-bootstrap'
+
+
 import AdminAllProductsCard from './AdminAllProductsCard'
+
+
 
 const AdminAllProducts = ({ products }) => {
 
@@ -15,7 +19,7 @@ const AdminAllProducts = ({ products }) => {
 
             </Row>
 
-        </div >
+        </div>
     )
 }
 

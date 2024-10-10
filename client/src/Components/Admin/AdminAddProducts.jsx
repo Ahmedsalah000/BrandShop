@@ -1,5 +1,5 @@
 import { Row, Col } from 'react-bootstrap'
-import Multiselect from 'multiselect-react-dropdown';
+import Multiselect from 'multiselect-react-dropdown'; 
 import add from '../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
 
