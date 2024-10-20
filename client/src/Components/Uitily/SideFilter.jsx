@@ -1,4 +1,3 @@
-import React from 'react'
 import { Row } from 'react-bootstrap'
 import SidebarSearchHook from '../../hook/search/sidebar-search-hook';
 
@@ -67,8 +66,8 @@ const SideFilter = () => {
             style={{ width: "50px", height: "25px" }}
           />
         </div>
-      </Row >
-    </div >
+      </Row>
+    </div>
   )
 }
 

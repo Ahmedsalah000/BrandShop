@@ -1,4 +1,3 @@
-import React from 'react'
 import UnopDropdown from "unop-react-dropdown";
 import sort from '../../images/sort.png'
 const SearchCountResult = ({ title ,onClick}) => {
