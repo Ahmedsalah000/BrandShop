@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createNewUser, forgetPassword, loginUser } from '../../redux/actions/authAction';
-import { useNavigate } from 'react-router-dom'
 import notify from '../useNotifaction';
 import { createReview } from './../../redux/actions/reviewAction';
 
 const AddRateHook = (id) => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [rateText, setRateText] = useState('')
-    const [rateValue, setRateValue] = useState(0)
+    const [rateValue, setRateValue] = useState(2)
+
 
     const [loading, setLoading] = useState(true)
 

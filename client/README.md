@@ -80,7 +80,7 @@ This is a comprehensive e-commerce web application built with React.js, featurin
 
 2. Navigate to the project folder:
    ```
-   cd [folder-name]
+   cd [client]
    ```
 
 3. Install dependencies:
@@ -90,7 +90,7 @@ This is a comprehensive e-commerce web application built with React.js, featurin
 
 4. Run the application:
    ```
-   npm start
+   npm run dev 
    ```
 
 ## Project Structure
