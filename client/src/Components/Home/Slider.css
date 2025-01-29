@@ -1,0 +1,321 @@
+/* تنسيق الحاوية الرئيسية للسلايدر */
+.slider-wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* تنسيق عناصر السلايدر */
+.custom-carousel {
+    position: relative;
+    height: 450px;
+}
+
+.custom-carousel .carousel-inner {
+    height: 100%;
+}
+
+.custom-carousel .carousel-item {
+    height: 100%;
+}
+
+.slider-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    direction: rtl;
+    height: 100%;
+    padding: 2rem 4rem;
+    margin: 0;
+    gap: 2rem;
+}
+
+/* تنسيق حاوية الصورة */
+.image-container {
+    flex: 0 0 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1rem;
+    margin: 0;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);
+}
+
+/* تنسيق حاوية النص */
+.text-container {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: right;
+    padding: 2rem;
+    margin: 0;
+    gap: 1.5rem;
+}
+
+/* تنسيق العناوين والنصوص */
+.slider-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider-text {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* زر التسوق */
+.shop-now-btn {
+    background: linear-gradient(-45deg, #FF3366, #FF6B6B, #4ECDC4, #45B7D1);
+    background-size: 300% 300%;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    animation: gradientBG 5s ease infinite;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.shop-now-btn::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(-45deg, #FF3366, #FF6B6B, #4ECDC4, #45B7D1);
+    background-size: 400% 400%;
+    z-index: -1;
+    animation: gradientBG 5s ease infinite;
+    border-radius: 50px;
+    opacity: 0.7;
+}
+
+.shop-now-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    animation: gradientBG 3s ease infinite;
+}
+
+.shop-now-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* خلفيات السلايدر */
+.slider-background {
+    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.slider-background2 {
+    background: linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.slider-background3 {
+    background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.slider-background4 {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* تنسيق أزرار التنقل */
+.custom-carousel .carousel-control-prev,
+.custom-carousel .carousel-control-next {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+.custom-carousel .carousel-control-prev {
+    right: 20px;
+    left: auto;
+}
+
+.custom-carousel .carousel-control-next {
+    left: 20px;
+    right: auto;
+}
+
+.custom-carousel .carousel-control-prev-icon,
+.custom-carousel .carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+    background-size: 100%;
+    filter: invert(1) grayscale(100%) brightness(50%);
+}
+
+.custom-carousel .carousel-control-prev:hover,
+.custom-carousel .carousel-control-next:hover {
+    background: rgba(255, 255, 255, 0.95);
+    opacity: 1;
+}
+
+/* تنسيق مؤشرات السلايدر */
+.custom-carousel .carousel-indicators {
+    bottom: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-carousel .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: none;
+    margin: 0 5px;
+    padding: 0;
+}
+
+.custom-carousel .carousel-indicators button.active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+/* التجاوب مع الشاشات المختلفة */
+@media (max-width: 992px) {
+    .slider-content {
+        padding: 2rem;
+        gap: 1.5rem;
+    }
+
+    .slider-title {
+        font-size: 2.5rem;
+    }
+
+    .slider-text {
+        font-size: 1.1rem;
+    }
+
+    .shop-now-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-content {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .image-container,
+    .text-container {
+        flex: 0 0 100%;
+        padding: 1rem;
+    }
+
+    .text-container {
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .slider-title {
+        font-size: 2rem;
+    }
+
+    .slider-text {
+        font-size: 1rem;
+    }
+
+    .shop-now-btn {
+        padding: 0.7rem 1.8rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .image-container img {
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .slider-content {
+        padding: 1rem;
+    }
+
+    .slider-title {
+        font-size: 1.75rem;
+    }
+
+    .slider-text {
+        font-size: 0.9rem;
+    }
+
+    .shop-now-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .image-container img {
+        max-height: 250px;
+    }
+}

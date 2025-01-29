@@ -1,6 +1,5 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap';
-import ReactStars from "react-rating-stars-component";
 import AddRateHook from '../../hook/review/add-rate-hook';
 import { ToastContainer } from 'react-toastify';
 import { useParams } from 'react-router-dom';
@@ -36,7 +35,7 @@ const RatePost = () => {
     name = user.name
 
 
-  // const setting = {
+
   //   size: 20,
   //   count: 5,
   //   color: "#979797",
@@ -56,7 +55,6 @@ const RatePost = () => {
       <Row className="mt-3 ">
         <Col sm="12" className="me-5  d-flex">
           <div className="rate-name  d-inline ms-3 mt-1 ">{name}</div>
-          {/* <ReactStars {...setting} /> */}
           <Box sx={{ width: 200, display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}>
       <Rating
         name="hover-feedback"
