@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getAllOrders } from '../../redux/actions/ordersAction';
+import { createSelector } from 'reselect';
+
+// Memoized selector
+const selectOrderState = state => state.orderReducer;
+const selectAllOrders = createSelector(
+    [selectOrderState],
+    orderState => orderState?.getAllOrders || []
+);
 
 const UserGetAllOrderHook = () => {
-
     const [loading, setLoading] = useState(true);
     const [results, setResult] = useState(0);
     const [paginate, setPaginate] = useState({});
@@ -32,20 +39,20 @@ const UserGetAllOrderHook = () => {
         await dispatch(getAllOrders(page, 5))
         setLoading(false)
     }
-    //get address detalis for user
-    const resAllOrder = useSelector(state => state.orderReducer.getAllOrders)
+
+    // Use memoized selector
+    const resAllOrder = useSelector(selectAllOrders)
+    
     useEffect(() => {
-        if (loading === false) {
-            if (resAllOrder.results)
+        if (loading === false && resAllOrder) {
+            if (resAllOrder.results !== undefined)
                 setResult(resAllOrder.results)
             if (resAllOrder.paginationResult)
                 setPaginate(resAllOrder.paginationResult)
             if (resAllOrder.data)
                 setOrderData(resAllOrder.data)
-
         }
-    }, [loading])
-
+    }, [loading, resAllOrder])
 
     return [userName, results, paginate, orderData, onPress]
 }

@@ -4,63 +4,68 @@ import { getOneProduct, getProductLike } from '../../redux/actions/productsActio
 import mobile from '../../images/mobile.png'
 import { getOneCategory } from '../../redux/actions/categoryAction';
 import { getOneBrand } from '../../redux/actions/brandAction';
-const ViewProductsDetalisHook = (prodID) => {
+import { createSelector } from '@reduxjs/toolkit';
 
+// Memoized selectors
+const selectOneProduct = createSelector(
+    state => state.allproducts?.oneProduct || {},
+    oneProduct => oneProduct
+);
+
+const selectOneCategory = createSelector(
+    state => state.allCategory?.oneCategory || {},
+    oneCategory => oneCategory
+);
+
+const selectOneBrand = createSelector(
+    state => state.allBrand?.oneBrand || {},
+    oneBrand => oneBrand
+);
+
+const selectProductLike = createSelector(
+    state => state.allproducts?.productLike || {},
+    productLike => productLike
+);
+
+const ViewProductsDetalisHook = (prodID) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getOneProduct(prodID))
-    }, [])
+        if (prodID) {
+            dispatch(getOneProduct(prodID))
+        }
+    }, [prodID])
 
-    const oneProducts = useSelector((state) => state.allproducts.oneProduct)
-    const oneCategory = useSelector((state) => state.allCategory.oneCategory)
-    const oneBrand = useSelector((state) => state.allBrand.oneBrand)
-    const productLike = useSelector((state) => state.allproducts.productLike)
+    const oneProducts = useSelector(selectOneProduct)
+    const oneCategory = useSelector(selectOneCategory)
+    const oneBrand = useSelector(selectOneBrand)
+    const productLike = useSelector(selectProductLike)
+
     //to show products item
-    let item = [];
-    if (oneProducts.data)
-        item = oneProducts.data;
-    else
-        item = []
+    let item = oneProducts?.data || [];
 
     useEffect(() => {
-        if (item.category)
+        // Only fetch category and brand data if valid IDs exist and are not empty
+        if (item?.category && typeof item.category === 'string' && item.category.trim() !== '') {
             dispatch(getOneCategory(item.category))
-        if (item.brand)
-            dispatch(getOneBrand(item.brand))
-        if (item.category)
+            // Fetch similar products in the same category
             dispatch(getProductLike(item.category))
-
+        }
+        if (item?.brand && typeof item.brand === 'string' && item.brand.trim() !== '') {
+            dispatch(getOneBrand(item.brand))
+        }
     }, [item])
 
-
     //to view images gallery
-    let images = []
-    if (item.images)
-        images = item.images.map((img) => { return { original: img } })
-    else {
-        images = [{ original: `${mobile}` }]
-    }
-
+    let images = item?.images ? item.images.map((img) => ({ original: img })) : [{ original: mobile }];
 
     //to show category item
-    let cat = [];
-    if (oneCategory.data)
-        cat = oneCategory.data;
-    else
-        cat = []
+    let cat = oneCategory?.data || [];
 
     //to show brand item
-    let brand = [];
-    if (oneBrand.data)
-        brand = oneBrand.data;
-    else
-        brand = []
+    let brand = oneBrand?.data || [];
 
-    let prod = []
-    if (productLike)
-        prod = productLike.data;
-    else
-        prod = []
+    let prod = productLike?.data || [];
+
     return [item, images, cat, brand, prod]
 }
 

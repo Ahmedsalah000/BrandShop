@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
 import { Card, Col } from 'react-bootstrap'
-
 import rate from "../../images/rate.png";
 import { Link } from 'react-router-dom';
 
@@ -47,7 +45,7 @@ const ProductCard = ({ item, favProd }) => {
                             {item.title}
                         </div>
                     </Card.Title>
-                    <Card.Text>
+                    <div className="mt-2">
                         <div className="d-flex justify-content-between ">
                             <div className="d-flex">
                                 <img
@@ -57,14 +55,15 @@ const ProductCard = ({ item, favProd }) => {
                                     height="16px"
                                     width="16px"
                                 />
-                                <div className="card-rate mx-2">{item.ratingsAverage || 0}</div>
+
+<div className="card-rate mx-2">{item?.ratingsAverage || 0}</div>
                             </div>
                             <div className="d-flex">
-                                <div className="card-price">{item.price}</div>
+                                <div className="card-price">{item?.price || 0}</div>
                                 <div className="card-currency mx-1">جنيه</div>
                             </div>
                         </div>
-                    </Card.Text>
+                    </div>
                 </Card.Body>
             </Card>
             <ToastContainer />

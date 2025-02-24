@@ -21,44 +21,64 @@ const LoginHook = () => {
     }
 
     const onSubmit = async () => {
+        if (!email || !password) {
+            notify("Please enter both email and password", "error");
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            notify("Please enter a valid email address", "error");
+            return;
+        }
+        if (password.length < 6) {
+            notify("Password must be at least 6 characters long", "error");
+            return;
+        }
         setIsPress(true)
         setLoading(true)
-        await dispatch(loginUser({
-            email,
-            password
-        }))
-
-        setLoading(false)
-        setIsPress(false)
+        try {
+            // Clear any existing tokens before login attempt
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            
+            await dispatch(loginUser({
+                email,
+                password
+            }));
+        } catch (error) {
+            console.error('Login error:', error);
+            notify(error.response?.data?.message || "Authentication failed. Please check your credentials.", "error");
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+        } finally {
+            setLoading(false)
+            setIsPress(false)
+        }
     }
     const res = useSelector(state => state.authReducer.loginUser)
     useEffect(() => {
         if (loading === false) {
             if (res) {
-                console.log(res)
-                if (res.data.token) {
-                    localStorage.setItem("token", res.data.token)
-                    localStorage.setItem("user", JSON.stringify(res.data.data))
-                    notify("تم تسجيل الدخول بنجاح", "success")
+                if (res.error) {
+                    notify(res.error, "error");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                } else if (res.data && res.data.token) {
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("user", JSON.stringify(res.data.data));
+                    notify("تم تسجيل الدخول بنجاح", "success");
                     setTimeout(() => {
-                        window.location.href = "/"
+                        window.location.href = "/";
                     }, 1500);
                 } else {
-                    localStorage.removeItem("token")
-                    localStorage.removeItem("user")
+                    notify("حدث خطأ في تسجيل الدخول", "error");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
                 }
-
-                if (res.data.message === "Incorrect email or password") {
-                    localStorage.removeItem("token")
-                    localStorage.removeItem("user")
-                    notify("كلمة السر او الايميل خطا", "error")
-                }
-                setLoading(true)
             }
         }
-    }, [loading])
+    }, [loading, res])
 
-    return [email, password, loading, onChangeEmail, onChangePassword, onSubmit, isPress]
+    return [email, password, loading, onChangeEmail, onChangePassword, onSubmit]
 }
 
 export default LoginHook

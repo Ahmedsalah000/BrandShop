@@ -61,7 +61,7 @@ const AdminAllProductsCard = ({ item }) => {
                                 {item.title}
                             </div>
                         </Card.Title>
-                        <Card.Text>
+                        <div className="mt-2">
                             <div className="d-flex justify-content-between">
                                 <div className="card-rate">{item.ratingsQuantity}</div>
                                 <div className="d-flex">
@@ -69,7 +69,7 @@ const AdminAllProductsCard = ({ item }) => {
                                     <div className="card-price">{item.price}</div>
                                 </div>
                             </div>
-                        </Card.Text>
+                        </div>
                     </Card.Body>
                 </Link>
             </Card>

@@ -6,7 +6,6 @@ import notify from '../../hook/useNotifaction'
 import avatar from '../../images/avatar.png'
 
 const AddBrandHook = () => {
-
     const dispatch = useDispatch();
     const [img, setImg] = useState(avatar)
     const [name, setName] = useState('')
@@ -33,16 +32,25 @@ const AddBrandHook = () => {
     const handelSubmit = async (event) => {
         event.preventDefault();
         if (name === "" || selectedFile === null) {
-            console.log('من فضلك اكمل البيانات')
-            notify('من فضلك اكمل البيانات', "warn");
+            notify('Please complete all required fields', "warn");
             return;
         }
+
         const formData = new FormData();
         formData.append("name", name)
         formData.append("image", selectedFile)
+        
         setLoading(true)
         setIsPress(true)
-        await dispatch(createBrand(formData))
+        
+        try {
+            await dispatch(createBrand(formData))
+        } catch (error) {
+            notify(error.message || 'Failed to add brand. Please try again.', "error");
+            setLoading(false)
+            setIsPress(false)
+            return;
+        }
         setLoading(false)
     }
 
@@ -51,18 +59,16 @@ const AddBrandHook = () => {
             setImg(avatar)
             setName("")
             setSelectedFile(null)
-            console.log('تم الانتهاء')
             setLoading(true)
             setTimeout(() => setIsPress(false), 1000)
 
-            if (res.status === 201) {
-                notify('تمت عملية الاضافة بنجاح', "success");
-            }
-            else {
-                notify('هناك مشكله فى عملية الاضافة', "error");
+            if (res && res.status === 201) {
+                notify('Brand added successfully', "success");
+            } else {
+                notify('Failed to add brand. Please check your connection and try again.', "error");
             }
         }
-    }, [loading])
+    }, [loading, res])
 
     return [img, name, loading, isPress, handelSubmit, onImageChange, onChangeName]
 };

@@ -11,7 +11,7 @@ const AdminAddBrand = () => {
                 <Col sm="8">
                     <div className="text-form pb-2">صوره الماركه</div>
                     <div>
-                        <label for="upload-photo">
+                        <label htmlFor="upload-photo">
                             <img
                                 src={img}
                                 alt="fzx"

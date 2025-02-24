@@ -22,14 +22,14 @@ const CardContainerHook = () => {
 
 
     useEffect(() => {
-
-        if (loading === false) {
-            if (res.data.length >= 1) {
+        if (loading === false && res) {
+            if (res.data && res.data.length >= 1) {
                 setFavProd(res.data.map(item => item._id))
-            } else setFavProd([])
+            } else {
+                setFavProd([])
+            }
         }
-
-    }, [loading])
+    }, [loading, res])
 
     return [favProd]
 

@@ -23,14 +23,14 @@ const RateContainer = ({ rateAvg, rateQty }) => {
 
             <RatePost />
 
-            {allReview.data ? (allReview.data.map((review, index) => {
+            {allReview && allReview.data ? (allReview.data.map((review, index) => {
                 return (<RateItem key={index} review={review} />)
             })) : <h6>لا يوجد تقيمات الان</h6>}
 
 
-            {
-                allReview.paginationResult && allReview.paginationResult.numberOfPages >= 2 ? (<Pagination pageCount={allReview.paginationResult ? allReview.paginationResult.numberOfPages : 0} onPress={onPress} />) : null
-            }
+            {allReview && allReview.paginationResult && allReview.paginationResult.numberOfPages >= 2 ? (
+                <Pagination pageCount={allReview.paginationResult.numberOfPages} onPress={onPress} />
+            ) : null}
         </Container>
     )
 }

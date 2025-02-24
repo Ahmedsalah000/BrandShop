@@ -36,9 +36,9 @@ const AdminAddProductsHook = () => {
     //values state
     const [prodName, setProdName] = useState('');
     const [prodDescription, setProdDescription] = useState('');
-    const [priceBefore, setPriceBefore] = useState('السعر قبل الخصم');
-    const [priceAftr, setPriceAftr] = useState('السعر بعد الخصم');
-    const [qty, setQty] = useState('الكمية المتاحة');
+    const [priceBefore, setPriceBefore] = useState('');
+    const [priceAftr, setPriceAftr] = useState('');
+    const [qty, setQty] = useState('');
     const [CatID, setCatID] = useState('');
     const [BrandID, SetBrandID] = useState('');
     const [subCatID, setSubCatID] = useState([]);
@@ -132,8 +132,21 @@ const AdminAddProductsHook = () => {
     //to save data 
     const handelSubmit = async (e) => {
         e.preventDefault();
-        if (CatID === 0 || prodName === "" || prodDescription === "" || images.length <= 0 || priceBefore <= 0) {
-            notify("من فضلك اكمل البيانات", "warn")
+        if (CatID === 0 || prodName === "" || prodDescription === "" || images.length <= 0) {
+            notify("Please complete all required fields", "warn");
+            return;
+        }
+
+        const numericPrice = Number(priceBefore);
+        const numericQty = Number(qty);
+
+        if (isNaN(numericPrice) || numericPrice <= 0) {
+            notify("Please enter a valid price", "warn");
+            return;
+        }
+
+        if (isNaN(numericQty) || numericQty <= 0) {
+            notify("Please enter a valid quantity", "warn");
             return;
         }
 
@@ -185,18 +198,18 @@ const AdminAddProductsHook = () => {
             setImages([])
             setProdName('')
             setProdDescription('')
-            setPriceBefore('السعر قبل الخصم')
-            setPriceAftr('السعر بعد الخصم')
-            setQty('الكمية المتاحة')
+            setPriceBefore('')
+            setPriceAftr('')
+            setQty('')
             SetBrandID(0)
             setSeletedSubID([])
             setTimeout(() => setLoading(true), 1500)
 
             if (product) {
                 if (product.status === 201) {
-                    notify("تم الاضافة بنجاح", "success")
+                    notify("Product added successfully", "success")
                 } else {
-                    notify("هناك مشكله", "error")
+                    notify("There was a problem adding the product", "error")
                 }
             }
         }

@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap'
 import Multiselect from 'multiselect-react-dropdown'; 
 import add from '../../images/add.png'
-import MultiImageInput from 'react-multiple-image-input';
+import ImageUploading from 'react-images-uploading';
 
 import { CompactPicker } from 'react-color'
 import { ToastContainer } from 'react-toastify';
@@ -19,13 +19,45 @@ const AdminAddProducts = () => {
                 <Col sm="8">
                     <div className="text-form pb-2"> صور للمنتج</div>
 
-                    <MultiImageInput
-                        images={images}
-                        setImages={setImages}
-                        theme={"light"}
-                        allowCrop={false}
-                        max={4}
-                    />
+                    <ImageUploading
+                        multiple
+                        value={images}
+                        onChange={setImages}
+                        maxNumber={4}
+                        dataURLKey="data_url"
+                    >
+                        {({
+                            imageList,
+                            onImageUpload,
+                            onImageRemoveAll,
+                            onImageUpdate,
+                            onImageRemove,
+                            isDragging,
+                            dragProps
+                        }) => (
+                            <div className="upload__image-wrapper">
+                                <button
+                                    style={isDragging ? { color: "red" } : null}
+                                    onClick={onImageUpload}
+                                    {...dragProps}
+                                    className="btn btn-outline-primary mb-3"
+                                >
+                                    Click or Drop here
+                                </button>
+                                &nbsp;
+                                <button onClick={onImageRemoveAll} className="btn btn-outline-danger mb-3">Remove all images</button>
+                                {Array.isArray(imageList) && imageList.map((image, index) => (
+                                    <div key={index} className="image-item d-inline-block me-2 mb-3">
+                                        <img src={image.data_url} alt="" width="100" />
+                                        <div className="image-item__btn-wrapper mt-2">
+                                            <button onClick={() => onImageUpdate(index)} className="btn btn-sm btn-primary me-2">Update</button>
+                                            <button onClick={() => onImageRemove(index)} className="btn btn-sm btn-danger">Remove</button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </ImageUploading>
 
                     <input
                         value={prodName}

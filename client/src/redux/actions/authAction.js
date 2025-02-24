@@ -22,25 +22,66 @@ export const createNewUser = (data) => async (dispatch) => {
         })
     }
 }
-
-//login  user 
+//login user 
 export const loginUser = (data) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/api/v1/auth/login`, data);
         dispatch({
             type: LOGIN_USER,
-            payload: response,
-            loading: true
-        })
+            payload: { loading: true, error: null }
+        });
 
+        const response = await useInsertData('/api/v1/auth/login', data);
+        
+        if (response?.data?.token) {
+            // Store token first
+            localStorage.setItem('token', response.data.token);
+            
+            try {
+                // Get user data
+                await dispatch(getLoggedUser());
+                
+                dispatch({
+                    type: LOGIN_USER,
+                    payload: { 
+                        data: response.data, 
+                        loading: false, 
+                        error: null 
+                    }
+                });
+            } catch (userError) {
+                // If getting user data fails, clear token and show error
+                localStorage.removeItem('token');
+                dispatch({
+                    type: LOGIN_USER,
+                    payload: { 
+                        error: userError.message || 'Failed to fetch user data after login', 
+                        loading: false,
+                        data: null
+                    }
+                });
+            }
+        } else {
+            dispatch({
+                type: LOGIN_USER,
+                payload: { 
+                    error: 'Invalid login response: Missing authentication token', 
+                    loading: false,
+                    data: null
+                }
+            });
+        }
     } catch (e) {
+        localStorage.removeItem('token');
         dispatch({
             type: LOGIN_USER,
-            payload: e.response,
-        })
+            payload: { 
+                error: e.response?.data?.message || 'Authentication failed. Please check your credentials.',
+                loading: false,
+                data: null
+            }
+        });
     }
 }
-
 //login  user 
 export const getLoggedUser = () => async (dispatch) => {
     try {

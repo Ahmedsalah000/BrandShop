@@ -15,7 +15,7 @@ export const getAllBrand = (limit) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ERROR,
-            payload: "Error " + e,
+            payload: e.message || "Error fetching brands",
         })
     }
 }
@@ -33,7 +33,7 @@ export const getOneBrand = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ERROR,
-            payload: "Error " + e,
+            payload: e.message || "Error fetching brand",
         })
     }
 }
@@ -50,11 +50,10 @@ export const getAllBrandPage = (page) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ERROR,
-            payload: "Error " + e,
+            payload: e.message || "Error fetching brands",
         })
     }
 }
-
 
 //insert brand with pagination
 export const createBrand = (formData) => async (dispatch) => {
@@ -69,7 +68,8 @@ export const createBrand = (formData) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ERROR,
-            payload: "Error " + e,
+            payload: e.message || "Error creating brand",
         })
+        throw e; // Re-throw to handle in the component
     }
 }

@@ -38,8 +38,14 @@ app.use(cloudinaryConfig);
 app.use(helmet());//
 app.use(xss());
 app.use(mongoSanitize());
-
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5174', 'https://brand-shop-omega.vercel.app'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.options('*', cors());
+app.enable('trust proxy');
 app.options('*', cors());
 app.enable('trust proxy');//
 

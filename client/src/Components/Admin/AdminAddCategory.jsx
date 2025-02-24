@@ -15,7 +15,7 @@ const AdminAddCategory = () => {
                 <Col sm="8">
                     <div className="text-form pb-2">صوره التصنيف</div>
                     <div>
-                        <label for="upload-photo">
+                        <label htmlFor="upload-photo">
                             <img
                                 src={img}
                                 alt="fzx"
