@@ -16,7 +16,7 @@ const useInUpdateDataWithImage = async (url, parmas) => {
         const res = await baseUrl.put(url, parmas, config);
         return res;
     } catch (error) {
-        if (error.response?.status === 403) {
+        if (error.response?.status === 401 || error.response?.status === 403) {
             localStorage.removeItem("token");
             throw new Error("Authentication failed. Please login again.");
         }
@@ -40,7 +40,7 @@ const useInsUpdateData = async (url, parmas) => {
         const res = await baseUrl.put(url, parmas, config);
         return res;
     } catch (error) {
-        if (error.response?.status === 403) {
+        if (error.response?.status === 401 || error.response?.status === 403) {
             localStorage.removeItem("token");
             throw new Error("Authentication failed. Please login again.");
         }

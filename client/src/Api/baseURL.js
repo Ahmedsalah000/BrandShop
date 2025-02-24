@@ -4,8 +4,11 @@ const baseUrl = axios.create({
   baseURL: 'https://brand-shop-omega.vercel.app',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  }
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+  },
+  withCredentials: true
 });
 
 // Add request interceptor to include token in headers
@@ -28,6 +31,8 @@ baseUrl.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401 || error.response?.status === 403) {
       localStorage.removeItem('token');
+    } else if (error.code === 'ERR_NETWORK') {
+      console.error('Network error: Unable to connect to the server');
     }
     return Promise.reject(error);
   }

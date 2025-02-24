@@ -39,15 +39,35 @@ app.use(helmet());//
 app.use(xss());
 app.use(mongoSanitize());
 app.use(cors({
-  origin: ['http://localhost:5174', 'https://brand-shop-omega.vercel.app'],
+  origin: function(origin, callback) {
+    const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  exposedHeaders: ['Authorization']
 }));
-app.options('*', cors());
+
+// Handle preflight requests for all routes
+app.options('*', (req, res) => {
+  const origin = req.headers.origin;
+  const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
+  
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
+  }
+  res.sendStatus(204);
+});
 app.enable('trust proxy');
-app.options('*', cors());
-app.enable('trust proxy');//
+
 
 // Add hook here before we call body parser, because stripe will send data in the body in form raw
 app.post(
@@ -94,4 +114,5 @@ const server = app.listen(PORT, () => {
 
 // we are listening to this unhandled rejection event, which then allow us to handle all
 // errors that occur in asynchronous code which were not previously handled
+
 
