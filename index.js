@@ -40,7 +40,11 @@ app.use(xss());
 app.use(mongoSanitize());
 app.use(cors({
   origin: function(origin, callback) {
-    const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
+    const allowedOrigins = [
+      'http://localhost:5174', 
+      'http://localhost:5173', 
+      'https://brand-shop-omega.vercel.app',
+      'https://5173-idx-brandshopgit-1744751218273.cluster-blu4edcrfnajktuztkjzgyxzek.cloudworkstations.dev'];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, origin);
     } else {
@@ -53,21 +57,7 @@ app.use(cors({
   exposedHeaders: ['Authorization']
 }));
 
-// Handle preflight requests for all routes
-app.options('*', (req, res) => {
-  const origin = req.headers.origin;
-  const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
-  
-  if (!origin || allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
-  }
-  res.sendStatus(204);
-});
 app.enable('trust proxy');
-
 
 // Add hook here before we call body parser, because stripe will send data in the body in form raw
 app.post(
