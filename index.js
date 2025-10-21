@@ -55,7 +55,6 @@ app.use(cors({
 }));
 app.enable('trust proxy');
 
-
 // Add hook here before we call body parser, because stripe will send data in the body in form raw
 app.post(
   '/webhook-checkout',
