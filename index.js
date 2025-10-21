@@ -38,9 +38,10 @@ app.use(cloudinaryConfig);
 app.use(helmet());//
 app.use(xss());
 app.use(mongoSanitize());
+const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
+
 app.use(cors({
   origin: function(origin, callback) {
-    const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, origin);
     } else {
@@ -49,23 +50,9 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin'],
   exposedHeaders: ['Authorization']
 }));
-
-// Handle preflight requests for all routes
-app.options('*', (req, res) => {
-  const origin = req.headers.origin;
-  const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
-  
-  if (!origin || allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
-  }
-  res.sendStatus(204);
-});
 app.enable('trust proxy');
 
 
@@ -92,6 +79,20 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(compression());
 
+// Handle preflight requests for all routes
+app.options('*', (req, res) => {
+  const origin = req.headers.origin;
+  const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://brand-shop-omega.vercel.app'];
+  
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
+  }
+  res.sendStatus(204);
+});
+app.enable('trust proxy');
 
 
 // Mount routers
@@ -114,5 +115,4 @@ const server = app.listen(PORT, () => {
 
 // we are listening to this unhandled rejection event, which then allow us to handle all
 // errors that occur in asynchronous code which were not previously handled
-
 

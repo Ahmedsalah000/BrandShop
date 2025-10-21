@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import HomePage from "./Page/Home/HomePage";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NavBarLogin from "./Components/Uitily/NavBarLogin";
@@ -29,7 +30,55 @@ import VerifyPasswordPage from "./Page/Auth/VerifyPasswordPage";
 import RsetPasswordPage from "./Page/Auth/ResetPasswordPage";
 import AdminAddCouponPage from "./Page/Admin/AdminAddCouponPage";
 import AdminEditCouponPage from './Page/Admin/AdminEditCouponPage';
+import { useDispatch } from 'react-redux';
+import { checkToken } from './redux/actions/authAction';
+import AdminTokenSetter from './Components/Utility/AdminTokenSetter';
+
 function App() {
+  const dispatch = useDispatch();
+
+  // Function to manually set the admin token (for testing)
+  const setAdminTokenManually = () => {
+    // Set the admin token from the information provided
+    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTk5YjEwNzlhNGNmNzA3MmMxZGYxMSIsImlhdCI6MTc0NDc1MjcyMCwiZXhwIjoxNzUyNTI4NzIwfQ.YfAckchZNECHu6TvfYtBDzscAGTcuw0Xg0QHfw6crzQ";
+    localStorage.setItem("token", adminToken);
+    
+    // Set admin user data
+    const adminUser = {
+      "_id": "66599b1079a4cf7072c1df11",
+      "name": "abushendy345",
+      "email": "abushendy345@gmail.com",
+      "role": "admin",
+      "active": true
+    };
+    localStorage.setItem("user", JSON.stringify(adminUser));
+    
+    console.log("Admin token manually set:", !!localStorage.getItem("token"));
+    console.log("Admin user data manually set:", !!localStorage.getItem("user"));
+  };
+
+  useEffect(() => {
+    // Check authentication token on app startup
+    const verifyAuthentication = async () => {
+      console.log("App started - verifying authentication status");
+      
+      // For testing: Automatically set admin token if not present
+      if (!localStorage.getItem("token")) {
+        console.log("No token found, setting admin token for testing");
+        setAdminTokenManually();
+      }
+      
+      try {
+        const isAuthenticated = await dispatch(checkToken());
+        console.log("Authentication verification completed:", isAuthenticated ? "Authenticated" : "Not authenticated");
+      } catch (error) {
+        console.error("Authentication verification failed:", error);
+      }
+    };
+
+    verifyAuthentication();
+  }, [dispatch]);
+
   return (
     <div className="font" >
       <NavBarLogin />
@@ -63,8 +112,8 @@ function App() {
           <Route path="/user/forget-password" element={<ForgetPasswordPage />} />
           <Route path="/user/verify-code" element={<VerifyPasswordPage />} />
           <Route path="/user/reset-password" element={<RsetPasswordPage />} />
-
         </Routes>
+        <AdminTokenSetter />
       </BrowserRouter>
       <Footer />
     </div>

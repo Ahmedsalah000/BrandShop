@@ -18,9 +18,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
 <title>Brand shop </title>
 
+<!-- Comment out this line to enable automatic admin token setting -->
+<!-- <script src="/admin-token.js"></script> -->
+
 </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Admin Login Button (Floating) -->
+    <div id="admin-login-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+      <button 
+        onclick="setAdminToken()" 
+        style="padding: 8px 12px; background-color: #343a40; color: white; border: none; border-radius: 4px; cursor: pointer; opacity: 0.7;"
+      >
+        Admin Login
+      </button>
+    </div>
+    
+    <script>
+      // Admin token setter function
+      function setAdminToken() {
+        // Admin token
+        const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTk5YjEwNzlhNGNmNzA3MmMxZGYxMSIsImlhdCI6MTc0NDc1MjcyMCwiZXhwIjoxNzUyNTI4NzIwfQ.YfAckchZNECHu6TvfYtBDzscAGTcuw0Xg0QHfw6crzQ";
+        localStorage.setItem("token", adminToken);
+        
+        // Admin user data
+        const adminUser = {
+            "_id": "66599b1079a4cf7072c1df11",
+            "name": "abushendy345",
+            "email": "abushendy345@gmail.com",
+            "role": "admin",
+            "active": true
+        };
+        localStorage.setItem("user", JSON.stringify(adminUser));
+        
+        console.log("Admin token set successfully:", !!localStorage.getItem("token"));
+        console.log("Admin user data set successfully:", !!localStorage.getItem("user"));
+        
+        alert("Admin token set successfully! The page will now reload.");
+        window.location.reload();
+      }
+    </script>
   </body>
 </html>

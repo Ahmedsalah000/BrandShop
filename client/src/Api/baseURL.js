@@ -1,12 +1,10 @@
 import axios from 'axios'
 
 const baseUrl = axios.create({
-  baseURL: 'https://brand-shop-omega.vercel.app',
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://brand-shop-omega.vercel.app',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+    'Accept': 'application/json'
   },
   withCredentials: true
 });

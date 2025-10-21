@@ -6,26 +6,32 @@ import { getOneCategory } from '../../redux/actions/categoryAction';
 import { getOneBrand } from '../../redux/actions/brandAction';
 import { createSelector } from '@reduxjs/toolkit';
 
-// Memoized selectors
+// Memoized selectors with transformation logic
 const selectOneProduct = createSelector(
-    state => state.allproducts?.oneProduct || {},
-    oneProduct => oneProduct
+    state => state.allproducts?.oneProduct,
+    oneProduct => oneProduct ? { ...oneProduct } : {}
 );
 
 const selectOneCategory = createSelector(
-    state => state.allCategory?.oneCategory || {},
-    oneCategory => oneCategory
+    state => state.allCategory?.oneCategory,
+    oneCategory => oneCategory ? { ...oneCategory } : {}
 );
 
 const selectOneBrand = createSelector(
-    state => state.allBrand?.oneBrand || {},
-    oneBrand => oneBrand
+    state => state.allBrand?.oneBrand,
+    oneBrand => oneBrand ? { ...oneBrand } : {}
 );
 
 const selectProductLike = createSelector(
-    state => state.allproducts?.productLike || {},
-    productLike => productLike
+    state => state.allproducts?.productLike,
+    productLike => productLike ? { ...productLike } : {}
 );
+
+// Alternative approach if you want more specific transformations:
+// const selectOneProduct = state => state.allproducts?.oneProduct || {};
+// const selectOneCategory = state => state.allCategory?.oneCategory || {};
+// const selectOneBrand = state => state.allBrand?.oneBrand || {};
+// const selectProductLike = state => state.allproducts?.productLike || {};
 
 const ViewProductsDetalisHook = (prodID) => {
     const dispatch = useDispatch();

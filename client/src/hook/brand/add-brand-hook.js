@@ -13,6 +13,8 @@ const AddBrandHook = () => {
     const [loading, setLoading] = useState(false)
     const [isPress, setIsPress] = useState(false)
 
+    // No authentication check at component mount - assume user is authorized
+
     //to change name state
     const onChangeName = (event) => {
         event.persist();
@@ -49,6 +51,8 @@ const AddBrandHook = () => {
     const handelSubmit = async (event) => {
         event.preventDefault();
         console.log('Form submission started with name:', name);
+
+        // No token verification - removed authentication check
 
         // Validate form data
         if (!name.trim()) {

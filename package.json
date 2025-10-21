@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon index.js",
-    "start:prod": "cross-env NODE_ENV=production node index.js"
+    "start:prod": "cross-env NODE_ENV=production node index.js",
+    "dev": "nodemon index.js",
+    "client": "cd client && npm run dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run client\""
   },
   "keywords": [],
   "author": "ahmed salah aboshendy",
@@ -41,6 +44,7 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "nodemon": "^3.1.1"
   },
   "engines": {

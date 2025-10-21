@@ -63,12 +63,23 @@ const LoginHook = () => {
                     localStorage.removeItem("token");
                     localStorage.removeItem("user");
                 } else if (res.data && res.data.token) {
-                    localStorage.setItem("token", res.data.token);
-                    localStorage.setItem("user", JSON.stringify(res.data.data));
-                    notify("تم تسجيل الدخول بنجاح", "success");
-                    setTimeout(() => {
-                        window.location.href = "/";
-                    }, 1500);
+                    // Store token with proper error handling
+                    try {
+                        localStorage.setItem("token", res.data.token);
+                        localStorage.setItem("user", JSON.stringify(res.data.data));
+                        
+                        // Verify token was stored correctly
+                        const storedToken = localStorage.getItem("token");
+                        console.log("Token stored successfully:", !!storedToken);
+                        
+                        notify("تم تسجيل الدخول بنجاح", "success");
+                        setTimeout(() => {
+                            window.location.href = "/";
+                        }, 1500);
+                    } catch (e) {
+                        console.error("Error storing token:", e);
+                        notify("حدث خطأ في حفظ بيانات تسجيل الدخول", "error");
+                    }
                 } else {
                     notify("حدث خطأ في تسجيل الدخول", "error");
                     localStorage.removeItem("token");
